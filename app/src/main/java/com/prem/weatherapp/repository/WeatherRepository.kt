@@ -7,14 +7,14 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import com.prem.weatherapp.R
 import com.prem.weatherapp.database.cities.CityDatabaseDao
 import com.prem.weatherapp.database.cities.DbSavedCity
-import com.prem.weatherapp.database.cities.asDomainModel
 import com.prem.weatherapp.database.weather.WeatherDatabaseDao
 import com.prem.weatherapp.database.weather.asDomainModel
 import com.prem.weatherapp.managers.LocationManager
 import com.prem.weatherapp.network.WeatherApi
 import com.prem.weatherapp.network.WeatherResult
-import com.prem.weatherapp.network.asDatabaseModel
 import com.prem.weatherapp.states.RefreshState
+import com.prem.weatherapp.utils.asDatabaseModel
+import com.prem.weatherapp.utils.asDomainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

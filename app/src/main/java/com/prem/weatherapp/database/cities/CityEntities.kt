@@ -1,5 +1,6 @@
 package com.prem.weatherapp.database.cities
 
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -7,6 +8,7 @@ import androidx.room.PrimaryKey
 import com.prem.weatherapp.domain.CitySearchResult
 import com.prem.weatherapp.domain.SavedCity
 
+@Keep
 @Entity(
     tableName = "saved_cities",
     foreignKeys = [
@@ -23,6 +25,7 @@ data class DbSavedCity(
     val selected: Boolean = true
 )
 
+@Keep
 @Entity(
     tableName = "cities",
     foreignKeys = [
@@ -50,6 +53,7 @@ data class DbCity(
     val lon: Double,
 )
 
+@Keep
 @Entity(tableName = "states")
 data class DbState(
     @PrimaryKey
@@ -57,6 +61,7 @@ data class DbState(
     val name: String
 )
 
+@Keep
 @Entity(tableName = "countries")
 data class DbCountry(
     @PrimaryKey
@@ -64,11 +69,13 @@ data class DbCountry(
     val name: String
 )
 
+@Keep
 data class Coord(
     val lat: Double,
     val lon: Double
 )
 
+@Keep
 data class DbSavedCityName(
     val id: Long,
     val city: String,
@@ -77,30 +84,9 @@ data class DbSavedCityName(
     val selected: Boolean
 )
 
+@Keep
 data class DbCityName(
     val id: Long,
     val city: String,
     val state: String?,
 )
-
-fun List<DbSavedCityName>.asDomainModel(): List<SavedCity> {
-    return map { c ->
-        SavedCity(
-            c.id,
-            "${c.city}${c.state?.let { ", $it" } ?: ""}${c.country?.let { ", $it" } ?: ""}",
-            c.selected
-        )
-    }
-}
-
-
-@JvmName("asDomainModelDbCityName")
-fun List<DbCityName>.asDomainModel(saved: List<Long>): List<CitySearchResult> {
-    return map { c ->
-        CitySearchResult(
-            c.id,
-            "${c.city}${c.state?.let { ", $it" } ?: ""}",
-            saved.binarySearch(c.id) >= 0
-        )
-    }
-}

@@ -1,7 +1,9 @@
 package com.prem.weatherapp.domain
 
+import androidx.annotation.Keep
 import java.time.ZonedDateTime
 
+@Keep
 data class Current(
     val lastUpdated: ZonedDateTime,
     val sunrise: ZonedDateTime,
@@ -21,6 +23,7 @@ data class Current(
     val description: String
 )
 
+@Keep
 data class Hourly(
     val time: ZonedDateTime,
     val temp: Int,
